@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Градієнт для неон-ліній і смуги -->
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%"  stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#a3e635"/>
+    </linearGradient>
+
+    <!-- М’яке світіння -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- МАСКА: білі дублікати всіх ліній авто -->
+    <mask id="linesMask" maskUnits="userSpaceOnUse">
+      <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 220 C120 160, 200 140, 300 150 C420 160, 480 180, 540 210" />
+        <path d="M120 240 C160 200, 220 180, 300 180 C380 180, 460 200, 500 230" />
+        <circle cx="210" cy="250" r="36" />
+        <circle cx="420" cy="250" r="36" />
+        <path d="M160 200 L220 200 L300 180 L380 190 L440 210 L480 220" />
+        <path d="M200 180 C240 150, 280 150, 320 170 C350 185, 400 190, 440 200" />
+      </g>
+    </mask>
+
+    <style>
+      /* Прозорість смуги; анімацію робимо SMIL-ом, не CSS */
+      .scan { opacity: .28; }
+      @media (prefers-reduced-motion: reduce) {
+        .scan { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Неонові лінії авто -->
+  <g fill="none" stroke="url(#g1)" stroke-width="3" filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 220 C120 160, 200 140, 300 150 C420 160, 480 180, 540 210" />
+    <path d="M120 240 C160 200, 220 180, 300 180 C380 180, 460 200, 500 230" />
+    <circle cx="210" cy="250" r="36" />
+    <circle cx="420" cy="250" r="36" />
+    <path d="M160 200 L220 200 L300 180 L380 190 L440 210 L480 220" />
+    <path d="M200 180 C240 150, 280 150, 320 170 C350 185, 400 190, 440 200" />
+  </g>
+
+  <!-- Діагональна смуга, видима тільки всередині ліній авто -->
+  <g mask="url(#linesMask)">
+    <!-- rotate(angle cx cy): обертаємо навколо центру кадру (300,180) -->
+    <rect class="scan"
+          x="-200" y="-60" width="120" height="480"
+          fill="url(#g1)"
+          transform="rotate(-8 300 180)">
+      <!-- SMIL-анімація: 1с рух (від -200 до 720), далі 5с пауза -->
+      <animate attributeName="x"
+               values="-200;720;720"
+               keyTimes="0;0.25;1"
+               dur="4s"
+               repeatCount="indefinite"
+               calcMode="linear" />
+    </rect>
+  </g>
+</svg>
