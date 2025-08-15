@@ -858,3 +858,17 @@ footer li {
         display: none !important;
     }
 }
+
+@media (min-width: 992px) {
+    body {
+        zoom: 1.05; /* для Chrome, Edge, Opera */
+    }
+
+    @-moz-document url-prefix() {
+        body {
+            transform: scale(1.05); /* для Firefox */
+            transform-origin: top center;
+        }
+    }
+}
+
