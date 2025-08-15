@@ -861,12 +861,12 @@ footer li {
 
 @media (min-width: 992px) {
     body {
-        zoom: 1.05; /* для Chrome, Edge, Opera */
+        zoom: 1.45; /* для Chrome, Edge, Opera */
     }
 
     @-moz-document url-prefix() {
         body {
-            transform: scale(1.05); /* для Firefox */
+            transform: scale(1.45); /* для Firefox */
             transform-origin: top center;
         }
     }
